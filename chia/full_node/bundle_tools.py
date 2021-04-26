@@ -7,7 +7,7 @@ import io
 from clvm_tools import binutils
 
 from chia.full_node.generator import create_compressed_generator
-from chia.types.blockchain_format.program import SerializedProgram
+from chia.types.blockchain_format.program import SerializedProgram, Program
 from chia.types.coin_solution import CoinSolution
 from chia.types.generator_types import BlockGenerator, CompressorArg
 from chia.types.spend_bundle import SpendBundle
@@ -97,7 +97,7 @@ def compress_coin_solution(coin_solution: CoinSolution):
     compressed_puzzle = compress_cse_puzzle(coin_solution.puzzle_reveal)
     return [
         [coin_solution.coin.parent_coin_info, coin_solution.coin.amount],
-        [compressed_puzzle, coin_solution.solution],
+        [Program.from_bytes(bytes(compressed_puzzle)), Program.from_bytes(bytes(coin_solution.solution))],
     ]
 
 
