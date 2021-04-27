@@ -97,7 +97,7 @@ def compress_coin_solution(coin_solution: CoinSolution):
     compressed_puzzle = compress_cse_puzzle(coin_solution.puzzle_reveal)
     return [
         [coin_solution.coin.parent_coin_info, coin_solution.coin.amount],
-        [Program.from_bytes(bytes(compressed_puzzle)), Program.from_bytes(bytes(coin_solution.solution))],
+        [compressed_puzzle, Program.from_bytes(bytes(coin_solution.solution))],
     ]
 
 
